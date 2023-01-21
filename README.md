@@ -7,6 +7,8 @@ ignoring [#large runtimes](#large-runtimes)
 
 example codes: http client
 
+other criteria: popularity, developer experience (debugging, interactive programming, ...)
+
 ## languages
 
 ### javascript
@@ -31,6 +33,20 @@ async function main() {
 }
 ```
 
+https://v8.dev/docs/untrusted-code-mitigations
+
+<blockquote>
+
+Sandbox untrusted execution in a separate process
+
+If you execute untrusted JavaScript and WebAssembly code in a separate process from any sensitive data, the potential impact of SSCA is greatly reduced. Through process isolation, SSCA attacks are only able to observe data that is sandboxed inside the same process along with the executing code, and not data from other processes.
+
+Consider tuning your offered high-precision timers
+
+A high-precision timer makes it easier to observe side channels in the SSCA vulnerability. If your product offers high-precision timers that can be accessed by untrusted JavaScript or WebAssembly code, consider making these timers more coarse or adding jitter to them.
+
+</blockquote>
+
 #### deno
 
 typescript interpreter, based on V8 javascript engine
@@ -50,12 +66,6 @@ https://rosettacode.org/wiki/HTTP#Clojure
 ```clj
 (print (slurp "http://www.rosettacode.org/"))
 ```
-
-#### babashka
-
-https://github.com/babashka/babashka
-
-Babashka is a native Clojure interpreter for scripting with fast startup. Its main goal is to leverage Clojure in places where you would be using bash otherwise.
 
 ### tcl
 
@@ -83,6 +93,14 @@ https://computerscomputing.wordpress.com/2013/02/18/lua-and-squirrel-the-case-fo
 > One of the most common issues facing game developers who embed Lua is the unpredictability of the garbage collector, which can affect real-time performance.
 
 > Squirrel performs constant memory management through refcounting.
+
+https://gitlab.com/nuald-grp/embedded-langs-footprint
+
+```squirrel
+function fn() {
+  return "Hello, " + read();
+}
+```
 
 ### lua
 
@@ -115,6 +133,16 @@ One issue with embedding Python is that it's difficult to sandbox - to securely 
 
 </blockquote>
 
+https://softwareengineering.stackexchange.com/questions/191623/best-practices-for-execution-of-untrusted-code
+
+<blockquote>
+
+Python sandboxing is hard. Python is inherently introspectable, at multiple levels.
+
+This also means that you can find the factory methods for specific types from those types themselves, and construct new low-level objects, which will be run directly by the interpreter without limitation.
+
+</blockquote>
+
 https://rosettacode.org/wiki/HTTP#Python
 
 ```py
@@ -127,6 +155,8 @@ print(text)
 ### micropython
 
 https://github.com/micropython/micropython
+
+python for microcontrollers
 
 ### scheme
 
@@ -147,6 +177,12 @@ https://rosettacode.org/wiki/HTTP#Scheme
 
 #### guile
 
+### wasm
+
+https://news.ycombinator.com/item?id=18279635 WebAssembly’s post-MVP future
+
+> I agree that WASM is only really interested for embedding untrusted code, but am not sure that the browser is the only place where you need that. A good example is Cloudflare's workers
+
 ## large runtimes
 
 - java
@@ -154,6 +190,7 @@ https://rosettacode.org/wiki/HTTP#Scheme
 - common lisp
 - smalltalk
 - erlang
+- babashka https://github.com/babashka/babashka - Babashka is a native Clojure interpreter for scripting with fast startup.
 
 ## see also
 
@@ -164,4 +201,3 @@ https://rosettacode.org/wiki/HTTP#Scheme
 - https://xkcd.com/2044/ Sandboxing Cycle
 - https://www.reddit.com/r/rust/comments/eh73wx/safe_interpreted_language_to_embed_untrusted_code/
    - https://github.com/rust-unofficial/awesome-rust#scripting
-   
