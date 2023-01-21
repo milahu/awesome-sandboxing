@@ -47,6 +47,18 @@ A high-precision timer makes it easier to observe side channels in the SSCA vuln
 
 </blockquote>
 
+see also
+
+- https://pwnisher.gitlab.io/nodejs/sandbox/2019/02/21/sandboxing-nodejs-is-hard.html
+- https://stackoverflow.com/questions/7446729/how-to-run-user-submitted-scripts-securely-in-a-node-js-sandbox
+- https://stackoverflow.com/questions/10937870/how-to-run-untrusted-code-serverside
+- https://stackoverflow.com/questions/45767337/running-untrusted-javascript-code-on-server-in-sandbox
+- https://github.com/fulcrumapp/v8-sandbox/blob/main/src/sandbox.cc
+- https://github.com/gf3/sandbox embeds a JavaScript interpreter in the library which executes code in a separate context in another thread. based on the [Boa](https://github.com/boa-dev/boa) JavaScript interpreter, written in Rust
+- https://www.figma.com/blog/how-we-built-the-figma-plugin-system/ compiling a JavaScript VM written in C to WebAssembly
+- https://www.freecodecamp.org/news/running-untrusted-javascript-as-a-saas-is-hard-this-is-how-i-tamed-the-demons-973870f76e1c/ nodejs in Docker container
+- https://github.com/milahu/awesome-javascript-interpreters
+
 #### deno
 
 typescript interpreter, based on V8 javascript engine
@@ -59,6 +71,16 @@ https://github.com/bellard/quickjs
 
 A small embedded JavaScript interpreter that implements almost all of ES2019 and much of ES2020.
 
+#### boa
+
+https://github.com/boa-dev/boa
+
+Boa is an embeddable and experimental Javascript engine written in Rust. Currently, it has support for some of the language.
+
+#### duktape
+
+https://github.com/svaarala/duktape
+
 ### clojure
 
 https://rosettacode.org/wiki/HTTP#Clojure
@@ -66,6 +88,10 @@ https://rosettacode.org/wiki/HTTP#Clojure
 ```clj
 (print (slurp "http://www.rosettacode.org/"))
 ```
+
+- https://github.com/WillDetlor/TinyClojure
+- https://github.com/chr15m/awesome-clojure-likes
+- https://github.com/bakpakin/Fennel - Fennel is a lisp that compiles to Lua. It aims to be easy to use, expressive, and has almost zero overhead compared to writing Lua directly.
 
 ### tcl
 
@@ -182,6 +208,8 @@ https://rosettacode.org/wiki/HTTP#Scheme
 https://news.ycombinator.com/item?id=18279635 WebAssembly’s post-MVP future
 
 > I agree that WASM is only really interested for embedding untrusted code, but am not sure that the browser is the only place where you need that. A good example is Cloudflare's workers
+
+https://stackoverflow.com/questions/61709122/can-i-use-webassembly-to-safely-execute-untrusted-user-code-within-my-web-app
 
 ## large runtimes
 
