@@ -50,6 +50,7 @@ A high-precision timer makes it easier to observe side channels in the SSCA vuln
 see also
 
 - https://pwnisher.gitlab.io/nodejs/sandbox/2019/02/21/sandboxing-nodejs-is-hard.html
+- https://code.google.com/archive/p/google-caja/wikis/AttackVectors.wiki
 - https://stackoverflow.com/questions/7446729/how-to-run-user-submitted-scripts-securely-in-a-node-js-sandbox
 - https://stackoverflow.com/questions/10937870/how-to-run-untrusted-code-serverside
 - https://stackoverflow.com/questions/45767337/running-untrusted-javascript-code-on-server-in-sandbox
@@ -103,6 +104,8 @@ set request [http::geturl "http://www.rosettacode.org"]
 puts [http::data $request]
 http::cleanup $request
 ```
+
+https://github.com/cyanogilvie/Tcl.js tcl interpreter written in javascript
 
 ### Squirrel
 
@@ -210,6 +213,49 @@ https://news.ycombinator.com/item?id=18279635 WebAssembly’s post-MVP future
 > I agree that WASM is only really interested for embedding untrusted code, but am not sure that the browser is the only place where you need that. A good example is Cloudflare's workers
 
 https://stackoverflow.com/questions/61709122/can-i-use-webassembly-to-safely-execute-untrusted-user-code-within-my-web-app
+
+## safe eval
+
+scripting languages with safe eval = first-class sandboxing
+
+host language = guest language (special case of embedded interpreter)
+
+https://news.ycombinator.com/item?id=17215829
+
+> In the E family, cousins to ECMAScript, the eval() function is confinement-safe and cannot access objects which it hasn't been given explicit access to use. The proof actually can be extended to any lambda calculus which doesn't have global mutable state.
+>
+> Edit: I should add that the crux of the technique involves a two-argument eval() with an explicit environment, as opposed to the single-argument eval() of ECMAScript.
+
+> Right. Access to the environment is the dangerous part, not the eval function. There's a proposal to tame the JS global environment along those lines: https://github.com/tc39/proposal-frozen-realms
+>
+> Note however that the threat model here does not include denial of service. You have to address that at another level like OS processes or E vats.
+
+> The problem is that you need to sandbox prototypes et al
+>
+> https://en.wikipedia.org/wiki/JSFuck https://stackoverflow.com/questions/2669690/why-does-google-...
+
+> I agree that safe eval and safe JSON parsing should be higher class citizens in the JS world. Just curious, is this (one of the reasons) why companies like Salesforce introduce an alternate language such as VisualForce, to have more control over safety? It would be nice to not have to force users to learn a new language to enable dynamic runtime features. I feel that it’s near impossible to outsmart all bad actors, but it would be nice to enable full user creativity by allowing access to an existing language.
+
+https://github.com/hacksparrow/safe-eval/blob/master/index.js on node.js
+
+https://stackoverflow.com/questions/3956319/simple-secure-scripting-language-implemented-in-javascript
+
+## DSL
+
+https://news.ycombinator.com/item?id=17215829
+
+> it’s fairly straight-forward to make a DSL for the given problems that this could solve.
+
+## not: sanitize input
+
+this is near-imposssible ...
+
+https://news.ycombinator.com/item?id=17215829
+
+> I can't believe nobody else pointed out JSFuck.
+Try the converter at http://www.jsfuck.com/ -- or browse the esolang entry: https://esolangs.org/wiki/JSFuck
+>
+> Spoiler: it can do everything normal JS can. Just because it uses 20,000 characters to do a simple if statement doesn't mean your eval is 'safe'.
 
 ## large runtimes
 
